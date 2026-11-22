@@ -1,56 +1,67 @@
-# sv
+# Glassform
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Glassform is a glass UI component library for **Svelte 5 and React**. Both versions share the same glass styles and photo-backed refraction renderer.
 
-## Creating a project
+[Documentation](https://glassform.pages.dev/) · [Playground](https://glassform.pages.dev/playground)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Status
 
-```sh
-# create a new project
-npx sv create my-app
+**About 50% complete.** The core surfaces, Everyday UI controls, and photo-backed `LensStage` are available in both frameworks. Reusable overlays, navigation, and feedback components are still planned.
+
+## Installation
+
+Run the command for your framework from a project configured with the corresponding shadcn CLI. The registry installs source files under your configured components directory. Glassform uses plain CSS at runtime.
+
+### Svelte
+
+```bash
+bunx shadcn-svelte@1.8.1 add https://glassform.pages.dev/r/glassform.json
 ```
 
-To recreate this project with the same configuration:
+```svelte
+<script lang="ts">
+  import GlassPanel from '$lib/components/glassform/GlassPanel.svelte';
+  import LensStage from '$lib/components/glassform/LensStage.svelte';
+</script>
 
-```sh
-# recreate this project
-bun x sv@1.7.0 create --template minimal --types ts --add prettier eslint --install bun glassform
+<LensStage photo={{ src: '/images/backdrop.webp' }}>
+  <GlassPanel material="lens">Your content</GlassPanel>
+</LensStage>
 ```
 
-## Adding features
+### React
 
-Add features to your project with `sv add`:
-
-```sh
-npx sv add
+```bash
+bunx shadcn@latest add https://glassform.pages.dev/r/glassform-react.json
 ```
 
-For example, to add Tailwind CSS:
+```tsx
+import { GlassPanel, LensStage } from "@/components/glassform/glassform";
 
-```sh
-npx sv add tailwindcss
+export function Preview() {
+  return (
+    <LensStage photo={{ src: "/images/backdrop.webp" }}>
+      <GlassPanel material="lens">Your content</GlassPanel>
+    </LensStage>
+  );
+}
 ```
 
-## Developing
+Adjust the imports if your project's components alias is different.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Blur and refraction
 
-```sh
-npm run dev
+Use a Lens surface on its own for translucent glass that blurs the **live page behind it**. This works without an image and suits overlays such as sidebars.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+Use `LensStage` for glass that **refracts a backdrop image**. Replace the example path with an image served by your app. One stage can serve multiple Lens surfaces, and unsupported rendering paths fall back to SVG refraction where available or CSS blur. The WebGL renderer samples the supplied image.
+
+## Development
+
+```bash
+bun install
+bun run dev
+bun run check
+bun run build
 ```
 
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+`bun run deploy` builds and publishes the site and both registries to Cloudflare Pages. It requires Wrangler access to the Glassform Pages project.
