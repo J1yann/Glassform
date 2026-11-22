@@ -1,0 +1,56 @@
+.glass-react-stage {
+	position: relative;
+	display: grid;
+	overflow: clip;
+	isolation: isolate;
+	--glass-react-filter: blur(var(--glass-blur, 4px));
+	--glass-react-drawn-filter: var(--glass-react-filter);
+}
+
+.glass-react-stage[data-glass-svg='true'] {
+	--glass-react-filter: blur(var(--glass-blur, 4px)) var(--glass-react-svg);
+}
+
+.glass-react-stage[data-glass-rendered='true'] {
+	--glass-react-drawn-filter: none;
+}
+
+.glass-react-stage > :is(.glass-react-photo, .glass-react-canvas, .glass-react-filter) {
+	position: absolute;
+	display: block;
+	pointer-events: none;
+}
+
+.glass-react-photo {
+	object-fit: cover;
+}
+
+.glass-react-canvas {
+	inset: 0;
+	inline-size: 100%;
+	block-size: 100%;
+	visibility: hidden;
+}
+
+.glass-react-stage[data-glass-rendered='true'] > .glass-react-canvas {
+	visibility: visible;
+}
+.glass-react-stage[data-glass-rendered='true'] > .glass-react-photo {
+	visibility: hidden;
+}
+
+.glass-react-foreground {
+	position: relative;
+	min-inline-size: 0;
+}
+
+@media (forced-colors: none) and (not (prefers-reduced-transparency: reduce)) {
+	.glass-react-stage [data-material='lens'] {
+		backdrop-filter: var(--glass-react-filter);
+		box-shadow: 0 0 0 var(--glass-rim-width, 2px) var(--glass-rim, #ffffff99);
+	}
+
+	.glass-react-stage [data-material='lens'][data-lens-stage-rendered] {
+		backdrop-filter: var(--glass-react-drawn-filter);
+	}
+}
