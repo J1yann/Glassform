@@ -2,7 +2,7 @@
 
 Glassform is a glass UI component library for **Svelte 5 and React**. Both versions share the same glass styles and photo-backed refraction renderer.
 
-[Documentation](https://glassform.pages.dev/) · [Playground](https://glassform.pages.dev/playground)
+[Documentation](https://glassform.jiyan.space/) · [Playground](https://glassform.jiyan.space/playground)
 
 ## Status
 
@@ -15,7 +15,7 @@ Run the command for your framework from a project configured with the correspond
 ### Svelte
 
 ```bash
-bunx shadcn-svelte@1.8.1 add https://glassform.pages.dev/r/glassform.json
+bunx shadcn-svelte@1.8.1 add https://glassform.jiyan.space/r/glassform.json
 ```
 
 ```svelte
@@ -32,7 +32,7 @@ bunx shadcn-svelte@1.8.1 add https://glassform.pages.dev/r/glassform.json
 ### React
 
 ```bash
-bunx shadcn@latest add https://glassform.pages.dev/r/glassform-react.json
+bunx shadcn@latest add https://glassform.jiyan.space/r/glassform-react.json
 ```
 
 ```tsx
