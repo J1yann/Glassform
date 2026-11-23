@@ -1,5 +1,7 @@
 # Glassform
 
+[![Registry downloads, last 30 days](https://img.shields.io/endpoint?url=https%3A%2F%2Fglassform.jiyan.space%2Fapi%2Fdownloads-badge)](https://glassform.jiyan.space/#installation)
+
 Glassform is a glass UI component library for **Svelte 5 and React**. Both versions share the same glass styles and photo-backed refraction renderer.
 
 [Documentation](https://glassform.jiyan.space/) · [Playground](https://glassform.jiyan.space/playground)
