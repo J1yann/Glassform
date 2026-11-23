@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { GlassButton, GlassSurface } from '#lib';
 
-	let { label, code }: { label: string; code: string } = $props();
+	let { label, code, wrap = false }: { label: string; code: string; wrap?: boolean } = $props();
 	const codeId = $props.id();
 	let codeElement: HTMLElement;
 	let status = $state('');
@@ -54,8 +54,9 @@
 		</span>
 	</div>
 	<!-- svelte-ignore a11y_no_noninteractive_tabindex (Keyboard access to horizontally scrolling code) -->
-	<pre role="region" aria-label={label} tabindex="0"><code id={codeId} bind:this={codeElement}
-			>{code}</code
+	<pre class:wrap role="region" aria-label={label} tabindex="0"><code
+			id={codeId}
+			bind:this={codeElement}>{code}</code
 		></pre>
 </GlassSurface>
 
@@ -112,6 +113,10 @@
 		font:
 			0.83rem/1.65 ui-monospace,
 			monospace;
+	}
+	pre.wrap {
+		white-space: pre-wrap;
+		overflow-wrap: anywhere;
 	}
 	pre:focus-visible {
 		outline: 2px solid var(--glass-focus);
